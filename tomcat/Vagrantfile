@@ -1,0 +1,16 @@
+# Vagrantfile - Ubuntu 24.04 VM with Java 8 and Tomcat 9
+Vagrant.configure("2") do |config|
+  config.vm.box = "bento/ubuntu-24.04"
+  config.vm.hostname = "tomcat-vm"
+
+  # guest port 7070 (Tomcat) -> host port 9090
+  config.vm.network "forwarded_port", guest: 7070, host: 9090
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.name   = "tomcat-vm"
+    vb.memory = 2048     # 2 GB RAM
+    vb.cpus   = 2
+  end
+
+  config.vm.provision "shell", path: "provision.sh"
+end
