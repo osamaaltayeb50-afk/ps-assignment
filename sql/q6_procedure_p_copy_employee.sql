@@ -16,8 +16,7 @@ BEGIN
         EXECUTE IMMEDIATE 'TRUNCATE TABLE MyEmployee_update';
     END IF;
 
-    INSERT INTO MyEmployee_update
-    SELECT * FROM MyEmployee;
+    EXECUTE IMMEDIATE 'INSERT INTO MyEmployee_update SELECT * FROM MyEmployee';
 
     v_rows := SQL%ROWCOUNT;   -- take the count before the commit
     COMMIT;
